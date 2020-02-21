@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[39]:
-
-
 class Matrix:
     
     ''' Calculates determinant and sum and product of 2 matrices. 
@@ -39,53 +33,51 @@ class Matrix:
         else:
             print('The number of rows of one matrix must be equals to the number columns of the other.')
     
-    # Applying the Sarrus rule to calculate the determinant
-    
-    def _expandeMatriz(self): #matrix used to calculate determinant
-        if len(self.matrix) == 2:
-            return self.matrix
-        else:
-            matrix_expandida = self.matrix[:] 
-            for i in range(len(self.matrix)-1): 
-                matrix_expandida.append(self.matrix[i])
-            return matrix_expandida
-         
-    def _inverterMatriz(self): #inverts matrix rows for secondary diagonal calculations
-        inverse = []
-        if len(self.matrix) < 3:
-            for lista in self.matrix:
-                inverse.append(list(reversed(lista)))
-        else:
-            for lista in self._expandeMatriz():
-                inverse.append(list(reversed(lista)))
-        return inverse
-    
-    def _productDiagonal(self, matrix): #self._expandeMatriz() or self._inverterMatriz()
-    
-        determinant = 0
-
-        if len(self.matrix) == 2:
-            produto_diagonal = 1
-            for i in range(len(self.matrix)):
-                produto_diagonal *= matrix[i][i]
-            determinant += produto_diagonal
-        else:
-            for i in range(len(self.matrix)):
-                k = 0
-                k2 = 0
-                produto_diagonal = 1
-                for j in range(len(self.matrix)):
-                    k1 = i
-                    k = k1 + k2
-                    produto_diagonal *= matrix[k][j]
-                    k2 += 1
-                determinant += produto_diagonal
-        return determinant
-    
     def findDeterminant(self):
+        
+        '''Determinant calculated based on Sarrus rule'''
+        
+        def expandeMatriz(): #matrix used to calculate determinant
+            if len(self.matrix) == 2:
+                return self.matrix
+            else:
+                matrix_expandida = self.matrix[:] 
+                for i in range(len(self.matrix)-1): 
+                    matrix_expandida.append(self.matrix[i])
+                return matrix_expandida
+         
+        def inverterMatriz(expandeMatriz): #inverts matrix rows for secondary diagonal calculations
+            inverse = []
+            if len(self.matrix) < 3:
+                for lista in self.matrix:
+                    inverse.append(list(reversed(lista)))
+            else:
+                for lista in expandeMatriz():
+                    inverse.append(list(reversed(lista)))
+            return inverse
+    
+        def productDiagonal(matrix): #self._expandeMatriz() or self._inverterMatriz()
+            determinant = 0
+            if len(self.matrix) == 2:
+                produto_diagonal = 1
+                for i in range(len(self.matrix)):
+                    produto_diagonal *= matrix[i][i]
+                determinant += produto_diagonal
+            else:
+                for i in range(len(self.matrix)):
+                    k = 0
+                    k2 = 0
+                    produto_diagonal = 1
+                    for j in range(len(self.matrix)):
+                        k1 = i
+                        k = k1 + k2
+                        produto_diagonal *= matrix[k][j]
+                        k2 += 1
+                    determinant += produto_diagonal
+                return determinant
+    
         if len(self.matrix) == len(self.matrix[0]):
-            determinant = self._productDiagonal(self._expandeMatriz()) - self._productDiagonal(self._inverterMatriz())
+            determinant = productDiagonal(expandeMatriz()) - productDiagonal(inverterMatriz(expandeMatriz))
             return determinant
         else:
             print('There only exists determinant of square matrices')
-
