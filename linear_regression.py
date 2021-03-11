@@ -8,11 +8,12 @@ class LinearRegressionOLS:
     Normalize the design matrix.'''
     
     def reshape_x(self,X):
+        # verify if X object is an array numpy. It can be a pandas object too.
+        if type(X) is not 'numpy.ndarray':
+            X = X.values
+            
         # Reshaping the design matrix, if necessary
         if len(X.shape) == 1:
-            # verify if X object is an array numpy. It can be a pandas object too.
-            if type(X) != 'numpy.ndarray':
-                X = X.values
             Xn = np.reshape(X, (X.shape[0],1))
         else:
             Xn = X.copy()
@@ -20,12 +21,11 @@ class LinearRegressionOLS:
         # adding a new column of ones in Xn to calculate the intercept
         m = Xn.shape[0]
         Xn = np.insert(Xn, 0, np.ones(m), axis = 1)
-        
         return Xn
     
     def reshape_y(self, y):
         # verifying if y is an array numpy
-        if type(y) != 'numpy.ndarray':
+        if type(y) is not 'numpy.ndarray':
             y = y.values
         y = np.reshape(y, (y.shape[0],1))
         return y
