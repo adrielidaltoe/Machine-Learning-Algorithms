@@ -9,7 +9,7 @@ class LinearRegressionOLS:
     
     def reshape_x(self,X):
         # verify if X object is an array numpy. It can be a pandas object too.
-        if type(X) is not 'numpy.ndarray':
+        if not isinstance(X, np.ndarray):
             X = X.values
             
         # Reshaping the design matrix, if necessary
@@ -25,7 +25,7 @@ class LinearRegressionOLS:
     
     def reshape_y(self, y):
         # verifying if y is an array numpy
-        if type(y) is not 'numpy.ndarray':
+        if not isinstance(y, np.ndarray):
             y = y.values
         y = np.reshape(y, (y.shape[0],1))
         return y
