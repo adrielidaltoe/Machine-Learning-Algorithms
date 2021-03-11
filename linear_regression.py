@@ -1,13 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import numpy as np
-
-
-# In[2]:
 
 
 class LinearRegressionOLS:
@@ -59,9 +51,6 @@ class LinearRegressionOLS:
     
     def score(self, y_pred, y_true):
         return np.sum(((y_true - y_pred)**2))/y_true.shape[0]
-
-
-# In[61]:
 
 
 class LinearRegressionGD(LinearRegressionOLS):
