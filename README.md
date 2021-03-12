@@ -1,2 +1,2 @@
-# Learning-Python
-Algorithms developed using Python
+# Machine Learning
+ML Algorithms programed in Python
