@@ -51,7 +51,8 @@ class LogisticRegression:
     def cost_function(self,X,y,m):
         cost = np.dot(y.T,np.log(self.sigmoid(X))) + np.dot((1-y).T,np.log(1- self.sigmoid(X)))
         if self.penalty:
-            J = - (cost + self.C*np.dot(self.coef.T, self.coef)/2) / m
+            # self.coef[1:] because bias is not regularized
+            J = - (cost + self.C*np.dot(self.coef[1:].T, self.coef[1:])/2) / m
         else:
             J = - cost / m
         return J
