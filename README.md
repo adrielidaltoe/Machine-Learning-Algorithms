@@ -1,2 +1,2 @@
 # Machine Learning
-ML Algorithms programed in Python
+ML Algorithms programmed in Python
