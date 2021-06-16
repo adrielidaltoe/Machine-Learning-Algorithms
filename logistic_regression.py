@@ -5,9 +5,9 @@ class LogisticRegression:
     '''Regularized Logistic Regression with Gradient Descent. Regularization Ridge ('l2') is implemented.
     It is advisable to normalize the data.
     
-    alpha: learning rate. It should be positive.
+    alpha: learning rate. Positive float.
     iterations: number of iterations. Positive integer.
-    tolerance: stop iterations when tolerance in estimated coefficients are smaller than the tolerance. Positive float.
+    tolerance: stop iterations when error in estimated coefficients is smaller than the tolerance. Positive float.
     penalty: apply regularization. Boolean.
     C: regularization term. Positive.'''
     
